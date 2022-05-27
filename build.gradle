@@ -3,6 +3,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        maven { url "https://www.jitpack.io" }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.2.2"
@@ -17,6 +18,16 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        maven { url "https://www.jitpack.io" }
+    }
+    configurations.all {
+        resolutionStrategy {
+            resolutionStrategy.eachDependency { details ->
+                if (details.requested.group == 'androidx.appcompat') {
+                    details.useVersion "1.2.0"
+                }
+            }
+        }
     }
 }
 

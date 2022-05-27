@@ -3,13 +3,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion 31
-    buildToolsVersion "31.0.0"
+    compileSdkVersion 29
+    buildToolsVersion '29.0.3'
 
     defaultConfig {
         applicationId "io.github.fileselector.example"
         minSdkVersion 21
-        targetSdkVersion 31
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 
@@ -36,4 +36,7 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation 'com.github.Baseflow:PhotoView:2.3.0'
+    implementation project(path: ':FileSelector')
 }

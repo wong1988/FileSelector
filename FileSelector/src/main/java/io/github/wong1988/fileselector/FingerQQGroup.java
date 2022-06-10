@@ -98,7 +98,20 @@ public class FingerQQGroup extends FrameLayout {
         return true;
     }
 
+    private boolean mVerticalMove = true;
+
+    /**
+     * 设置是否可以响应垂直方向滑动
+     */
+    public void canVerticalMove(boolean verticalMove) {
+        mVerticalMove = verticalMove;
+    }
+
     private void onOneFingerPanActionMove(MotionEvent event) {
+
+        if (!mVerticalMove)
+            return;
+
         float moveY = event.getRawY();
         mTranslationY = moveY - mDownY + mLastTranslationY;
         float percent = Math.abs(mTranslationY / (MAX_TRANSLATE_Y + photoView.getHeight()));

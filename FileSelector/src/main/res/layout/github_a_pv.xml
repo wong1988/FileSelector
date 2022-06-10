@@ -11,23 +11,43 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <FrameLayout
-        android:id="@+id/github_a_pv_fl"
+    <LinearLayout
+        android:id="@+id/github_a_pv_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/github_a_top_bg">
+        android:background="@drawable/github_a_top_bg"
+        android:orientation="horizontal"
+        android:paddingTop="60dp">
+
+        <ImageView
+            android:id="@+id/github_a_pv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:src="@drawable/github_a_back"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/github_a_pv_tv"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center"
-            android:paddingTop="60dp"
             android:paddingBottom="20dp"
             android:textColor="#FFFFFF"
             android:textSize="13sp"
             tools:text="1/5" />
 
-    </FrameLayout>
+        <ImageView
+            android:id="@+id/github_a_pv_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:src="@drawable/github_a_delete"
+            android:visibility="gone" />
+
+    </LinearLayout>
 
 </FrameLayout>

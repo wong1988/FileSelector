@@ -11,16 +11,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <TextView
-        android:id="@+id/github_a_pv_tv"
+    <FrameLayout
+        android:id="@+id/github_a_pv_fl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#63000000"
-        android:gravity="center"
-        android:paddingTop="100dp"
-        android:paddingBottom="20dp"
-        android:textColor="#FFFFFF"
-        android:textSize="13sp"
-        tools:text="1/5" />
+        android:background="#63000000">
+
+        <TextView
+            android:id="@+id/github_a_pv_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="80dp"
+            android:paddingBottom="20dp"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            tools:text="1/5" />
+
+    </FrameLayout>
 
 </FrameLayout>

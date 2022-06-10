@@ -15,7 +15,7 @@
         android:id="@+id/github_a_pv_fl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#63000000">
+        android:background="@drawable/github_a_top_bg">
 
         <TextView
             android:id="@+id/github_a_pv_tv"

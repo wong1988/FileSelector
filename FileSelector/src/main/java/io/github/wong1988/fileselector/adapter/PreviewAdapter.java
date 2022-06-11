@@ -2,14 +2,20 @@ package io.github.wong1988.fileselector.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.github.chrisbanes.photoview.PhotoView;
 
 import java.io.File;
@@ -46,12 +52,25 @@ public class PreviewAdapter extends RecyclerView.Adapter<PreviewAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ImgInfo imgInfo = mData.get(position);
+        holder.photoView.setZoomable(false);
         switch (imgInfo.getType()) {
             case ImageResource:
                 Glide.with(mContext)
                         .load(mContext.getResources().getDrawable(Integer.parseInt(imgInfo.getPath())))
                         .placeholder(R.drawable.github_a_loading_anim)
                         .error(R.drawable.github_a_error)
+                        .listener(new RequestListener<Drawable>() {
+                            @Override
+                            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                return false;
+                            }
+
+                            @Override
+                            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                holder.photoView.setZoomable(true);
+                                return false;
+                            }
+                        })
                         .into(holder.photoView);
                 break;
             case HTTP:
@@ -59,6 +78,18 @@ public class PreviewAdapter extends RecyclerView.Adapter<PreviewAdapter.ViewHold
                         .load(imgInfo.getPath())
                         .placeholder(R.drawable.github_a_loading_anim)
                         .error(R.drawable.github_a_error)
+                        .listener(new RequestListener<Drawable>() {
+                            @Override
+                            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                return false;
+                            }
+
+                            @Override
+                            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                holder.photoView.setZoomable(true);
+                                return false;
+                            }
+                        })
                         .into(holder.photoView);
                 break;
             case File:
@@ -66,6 +97,18 @@ public class PreviewAdapter extends RecyclerView.Adapter<PreviewAdapter.ViewHold
                         .load(new File(imgInfo.getPath()))
                         .placeholder(R.drawable.github_a_loading_anim)
                         .error(R.drawable.github_a_error)
+                        .listener(new RequestListener<Drawable>() {
+                            @Override
+                            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                return false;
+                            }
+
+                            @Override
+                            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                holder.photoView.setZoomable(true);
+                                return false;
+                            }
+                        })
                         .into(holder.photoView);
                 break;
         }

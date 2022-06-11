@@ -1,5 +1,9 @@
 package io.github.wong1988.fileselector.entity;
 
+import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
+
 import io.github.wong1988.fileselector.attr.ImageType;
 
 public class ImgInfo {
@@ -11,7 +15,9 @@ public class ImgInfo {
      * @param path 图片路径
      * @param type 图片类型
      */
-    public ImgInfo(String path, ImageType type) {
+    public ImgInfo(@NonNull String path, @NonNull ImageType type) {
+        if (TextUtils.isEmpty(path) && type == ImageType.ImageResource)
+            path = "0";
         this.path = path;
         this.type = type;
     }

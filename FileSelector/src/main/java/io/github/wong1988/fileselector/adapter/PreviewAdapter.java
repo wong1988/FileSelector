@@ -1,5 +1,6 @@
 package io.github.wong1988.fileselector.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,23 +42,30 @@ public class PreviewAdapter extends RecyclerView.Adapter<PreviewAdapter.ViewHold
         return new ViewHolder(view);
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ImgInfo imgInfo = mData.get(position);
         switch (imgInfo.getType()) {
             case ImageResource:
-                holder.photoView.setImageResource(Integer.parseInt(imgInfo.getPath()));
+                Glide.with(mContext)
+                        .load(mContext.getResources().getDrawable(Integer.parseInt(imgInfo.getPath())))
+                        .placeholder(R.drawable.github_a_loading_anim)
+                        .error(R.drawable.github_a_error)
+                        .into(holder.photoView);
                 break;
             case HTTP:
                 Glide.with(mContext)
                         .load(imgInfo.getPath())
                         .placeholder(R.drawable.github_a_loading_anim)
+                        .error(R.drawable.github_a_error)
                         .into(holder.photoView);
                 break;
             case File:
                 Glide.with(mContext)
                         .load(new File(imgInfo.getPath()))
                         .placeholder(R.drawable.github_a_loading_anim)
+                        .error(R.drawable.github_a_error)
                         .into(holder.photoView);
                 break;
         }

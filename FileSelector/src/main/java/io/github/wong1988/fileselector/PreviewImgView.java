@@ -26,6 +26,9 @@ import io.github.wong1988.fileselector.entity.ImgInfo;
 import io.github.wong1988.fileselector.listener.PreviewListener;
 import io.github.wong1988.fileselector.manager.ScrollLinearLayoutManager;
 
+/**
+ * 支持删除时，顶部阴影不会去除，并且按钮持续显示，并且不支持下拉关闭
+ */
 public class PreviewImgView extends FrameLayout {
 
     private final TextView mTv;
@@ -113,6 +116,15 @@ public class PreviewImgView extends FrameLayout {
             public void onCloseListener() {
                 if (mPreviewListener != null)
                     mPreviewListener.onClosed(mDeleteList, mAdapter.getAttachData());
+            }
+
+            @Override
+            public void onClick(int position, ImgInfo imgInfo) {
+                if (mShowDelete) {
+                    mLl.setVisibility(mLl.getVisibility() == VISIBLE ? GONE : VISIBLE);
+                } else {
+
+                }
             }
         });
 

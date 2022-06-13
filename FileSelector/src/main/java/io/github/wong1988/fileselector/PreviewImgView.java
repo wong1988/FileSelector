@@ -199,8 +199,8 @@ public class PreviewImgView extends FrameLayout {
     public void setButton(boolean supportBack, boolean supportDelete) {
         mShowDelete = supportDelete;
         mShowBack = supportBack;
-        mBack.setVisibility(mShowBack ? VISIBLE : GONE);
-        mDelete.setVisibility(mShowDelete ? VISIBLE : GONE);
+        mBack.setVisibility(mShowBack ? VISIBLE : INVISIBLE);
+        mDelete.setVisibility(mShowDelete ? VISIBLE : INVISIBLE);
 
         mAdapter.setVerticalMove(mVerticalClose && !mShowDelete);
     }

@@ -48,11 +48,13 @@ public class PreviewAdapter extends RecyclerView.Adapter<PreviewAdapter.ViewHold
         return new ViewHolder(view);
     }
 
+
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         ImgInfo imgInfo = mData.get(position);
         holder.photoView.setZoomable(false);
+        holder.qqGroup.canVerticalMove(false);
         switch (imgInfo.getType()) {
             case ImageResource:
                 Glide.with(mContext)
@@ -68,6 +70,8 @@ public class PreviewAdapter extends RecyclerView.Adapter<PreviewAdapter.ViewHold
                             @Override
                             public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                                 holder.photoView.setZoomable(true);
+                                if (mVerticalMove)
+                                    holder.qqGroup.canVerticalMove(true);
                                 return false;
                             }
                         })
@@ -87,6 +91,8 @@ public class PreviewAdapter extends RecyclerView.Adapter<PreviewAdapter.ViewHold
                             @Override
                             public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                                 holder.photoView.setZoomable(true);
+                                if (mVerticalMove)
+                                    holder.qqGroup.canVerticalMove(true);
                                 return false;
                             }
                         })
@@ -106,6 +112,8 @@ public class PreviewAdapter extends RecyclerView.Adapter<PreviewAdapter.ViewHold
                             @Override
                             public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                                 holder.photoView.setZoomable(true);
+                                if (mVerticalMove)
+                                    holder.qqGroup.canVerticalMove(true);
                                 return false;
                             }
                         })
@@ -127,7 +135,7 @@ public class PreviewAdapter extends RecyclerView.Adapter<PreviewAdapter.ViewHold
             public void onTranslationYChanged(float translationY) {
                 mManger.setCanScroll(false);
 
-                if (mListener != null)
+                if (mListener != null && holder.photoView.isZoomable())
                     mListener.onTranslationYChanged(translationY);
             }
 
@@ -138,13 +146,11 @@ public class PreviewAdapter extends RecyclerView.Adapter<PreviewAdapter.ViewHold
             }
         });
 
-        holder.qqGroup.canVerticalMove(mVerticalMove);
-
         holder.photoView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mListener != null)
-                    mListener.onClick(position, mData.get(position));
+                    mListener.onClick(position, imgInfo);
             }
         });
     }

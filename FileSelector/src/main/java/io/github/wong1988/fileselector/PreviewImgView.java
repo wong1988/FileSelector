@@ -123,7 +123,8 @@ public class PreviewImgView extends FrameLayout {
                 if (mShowDelete) {
                     mLl.setVisibility(mLl.getVisibility() == VISIBLE ? GONE : VISIBLE);
                 } else {
-
+                    if (mPreviewListener != null)
+                        mPreviewListener.onClosed(mDeleteList, mAdapter.getAttachData());
                 }
             }
         });

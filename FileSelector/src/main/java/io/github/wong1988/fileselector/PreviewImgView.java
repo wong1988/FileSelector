@@ -298,8 +298,7 @@ public class PreviewImgView extends FrameLayout {
             }
             if (onPageChangeListener != null) {
                 onPageChangeListener.onScrollStateChanged(recyclerView, newState);
-                // newState == RecyclerView.SCROLL_STATE_IDLE 当滚动停止时触发防止在滚动过程中不停触发
-                if (newState == RecyclerView.SCROLL_STATE_IDLE && oldPosition != position) {
+                if (oldPosition != position) {
                     oldPosition = position;
                     onPageChangeListener.onPageSelected(position);
                 }

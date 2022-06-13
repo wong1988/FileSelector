@@ -27,7 +27,7 @@ import io.github.wong1988.fileselector.listener.PreviewListener;
 import io.github.wong1988.fileselector.manager.ScrollLinearLayoutManager;
 
 /**
- * 支持删除时，顶部阴影不会去除，并且按钮持续显示，并且不支持下拉关闭
+ * 支持删除时，顶部阴影不会去除，并且按钮持续显示，并且不支持下拉关闭，点击图片，显示、隐藏顶部按钮
  */
 public class PreviewImgView extends FrameLayout {
 
@@ -250,6 +250,11 @@ public class PreviewImgView extends FrameLayout {
      */
     public void setPreviewListener(PreviewListener previewListener) {
         this.mPreviewListener = previewListener;
+    }
+
+    public void onBackPress() {
+        if (mPreviewListener != null)
+            mPreviewListener.onClosed(mDeleteList, mAdapter.getAttachData());
     }
 
     @SuppressLint("SetTextI18n")

@@ -139,6 +139,14 @@ public class PreviewAdapter extends RecyclerView.Adapter<PreviewAdapter.ViewHold
         });
 
         holder.qqGroup.canVerticalMove(mVerticalMove);
+
+        holder.photoView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null)
+                    mListener.onClick(position, mData.get(position));
+            }
+        });
     }
 
     @Override
@@ -188,5 +196,7 @@ public class PreviewAdapter extends RecyclerView.Adapter<PreviewAdapter.ViewHold
         void onTranslationYChanged(float translationY);
 
         void onCloseListener();
+
+        void onClick(int position, ImgInfo imgInfo);
     }
 }

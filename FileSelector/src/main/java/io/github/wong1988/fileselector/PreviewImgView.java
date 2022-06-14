@@ -109,7 +109,7 @@ public class PreviewImgView extends FrameLayout {
                 if (mPreviewListener != null)
                     mPreviewListener.onTranslationYChanged(translationY);
 
-                mLl.setVisibility(translationY == 0 ? VISIBLE : GONE);
+                mLl.setVisibility(translationY == 0 && mAnimator.isRunning() ? VISIBLE : GONE);
             }
 
             @Override

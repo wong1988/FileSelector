@@ -303,7 +303,8 @@ public class PreviewImgView extends FrameLayout {
             if (view != null) {
                 // 获取itemView的position
                 position = layoutManager.getPosition(view);
-            }
+            } else
+                position = -1;
             if (onPageChangeListener != null) {
                 onPageChangeListener.onScrollStateChanged(recyclerView, newState);
                 if (oldPosition != position) {

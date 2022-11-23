@@ -296,15 +296,14 @@ public class PreviewImgView extends FrameLayout {
         @Override
         public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
             super.onScrollStateChanged(recyclerView, newState);
-            int position = 0;
+            int position = -1;
             RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
             // 获取当前选中的itemView
             View view = mSnapHelper.findSnapView(layoutManager);
             if (view != null) {
                 // 获取itemView的position
                 position = layoutManager.getPosition(view);
-            } else
-                position = -1;
+            }
             if (onPageChangeListener != null) {
                 onPageChangeListener.onScrollStateChanged(recyclerView, newState);
                 if (oldPosition != position) {

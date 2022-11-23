@@ -12,6 +12,17 @@ public class ImgInfo implements Parcelable {
 
     private String path;
     private ImageType type;
+    private boolean forbidDelete;
+
+    /**
+     * 此为新增需求：支持部分图片不允许删除  forbidDelete = true
+     *
+     * @param forbidDelete 是否可以删除由 PreviewImgView setButton() 与 forbidDelete 共同决定
+     */
+    public ImgInfo(@NonNull String path, @NonNull ImageType type, boolean forbidDelete) {
+        this(path, type);
+        this.forbidDelete = forbidDelete;
+    }
 
     /**
      * @param path 图片路径
@@ -38,6 +49,10 @@ public class ImgInfo implements Parcelable {
         return type;
     }
 
+    public boolean isForbidDelete() {
+        return forbidDelete;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -47,18 +62,21 @@ public class ImgInfo implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.path);
         dest.writeInt(this.type == null ? -1 : this.type.ordinal());
+        dest.writeByte(this.forbidDelete ? (byte) 1 : (byte) 0);
     }
 
     public void readFromParcel(Parcel source) {
         this.path = source.readString();
         int tmpType = source.readInt();
         this.type = tmpType == -1 ? null : ImageType.values()[tmpType];
+        this.forbidDelete = source.readByte() != 0;
     }
 
     protected ImgInfo(Parcel in) {
         this.path = in.readString();
         int tmpType = in.readInt();
         this.type = tmpType == -1 ? null : ImageType.values()[tmpType];
+        this.forbidDelete = in.readByte() != 0;
     }
 
     public static final Creator<ImgInfo> CREATOR = new Creator<ImgInfo>() {

@@ -187,6 +187,8 @@ public class PreviewImgView extends FrameLayout {
                     if (mPreviewListener != null)
                         mPreviewListener.onClosed(mDeleteList, mAdapter.getAttachData());
 
+                    mDelete.setVisibility(INVISIBLE);
+
                 } else {
                     setTv(mCurrentItem);
 
@@ -211,7 +213,7 @@ public class PreviewImgView extends FrameLayout {
         mShowDelete = supportDelete;
         mShowBack = supportBack;
         mBack.setVisibility(mShowBack ? VISIBLE : INVISIBLE);
-        mDelete.setVisibility(mShowDelete ? VISIBLE : INVISIBLE);
+        mDelete.setVisibility(mShowDelete && mAdapter.getAttachData().size() > 0 && !mAdapter.getAttachData().get(mCurrentItem).isForbidDelete() ? VISIBLE : INVISIBLE);
 
         mAdapter.setVerticalMove(mVerticalClose && !mShowDelete);
     }
@@ -236,6 +238,8 @@ public class PreviewImgView extends FrameLayout {
             mCurrentItem = 0;
             setTv(mCurrentItem);
         }
+
+        mDelete.setVisibility(mShowDelete && mAdapter.getAttachData().size() > 0 && !mAdapter.getAttachData().get(mCurrentItem).isForbidDelete() ? VISIBLE : INVISIBLE);
     }
 
     /**

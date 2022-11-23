@@ -90,6 +90,7 @@ public class PreviewImgView extends FrameLayout {
                     mAdapter.notifyItemChanged(mCurrentItem);
                     mCurrentItem = position;
                     setTv(mCurrentItem);
+                    mDelete.setVisibility(mShowDelete && !mAdapter.getAttachData().get(mCurrentItem).isForbidDelete() ? VISIBLE : INVISIBLE);
                 }
                 if (mPreviewListener != null)
                     mPreviewListener.onPageSelected(position);
@@ -191,6 +192,8 @@ public class PreviewImgView extends FrameLayout {
 
                     if (mPreviewListener != null)
                         mPreviewListener.onPageSelected(mCurrentItem);
+
+                    mDelete.setVisibility(mShowDelete && !mAdapter.getAttachData().get(mCurrentItem).isForbidDelete() ? VISIBLE : INVISIBLE);
                 }
             }
         });

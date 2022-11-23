@@ -166,6 +166,9 @@ public class PreviewImgView extends FrameLayout {
             @Override
             public void onClick(View v) {
 
+                if (mCurrentItem < 0 || mAdapter.getAttachData().size() <= mCurrentItem)
+                    return;
+
                 if (mAdapter.getAttachData().get(mCurrentItem).isForbidDelete())
                     // 当前图片不让删除
                     return;

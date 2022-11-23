@@ -165,6 +165,11 @@ public class PreviewImgView extends FrameLayout {
         mDelete.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (mAdapter.getAttachData().get(mCurrentItem).isForbidDelete())
+                    // 当前图片不让删除
+                    return;
+
                 mDeleteList.add(mAdapter.getAttachData().get(mCurrentItem));
                 mAdapter.getAttachData().remove(mCurrentItem);
                 mAdapter.notifyItemRemoved(mCurrentItem);
